@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
-# Create your views here.
+from .forms import CustomAuthenticationForm
 
 
 def index(request):
-        return render(request,'layouts/index.html')
+        return render(request,'index.html')
         
 def signup(request):
     if request.method == 'GET':
@@ -43,7 +43,7 @@ def signout(request):
 def signin(request):
     if request.method == 'GET':
         return render(request, 'signin.html', {
-            'form': AuthenticationForm,
+            'form': CustomAuthenticationForm,
         })
     else:
         user = authenticate(
@@ -51,8 +51,8 @@ def signin(request):
 
         if user is None:
             return render(request, 'signin.html', {
-                'form': AuthenticationForm,
-                'error': 'Username or password is incorrect',
+                'form': CustomAuthenticationForm,
+                'error': 'Usuario o Contraseña Incorrectos',
             })
         else:
             login(request, user)
