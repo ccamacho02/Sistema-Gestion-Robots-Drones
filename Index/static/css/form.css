@@ -1,0 +1,48 @@
+/* Estilos generales para el formulario */
+
+.auth h1{
+    font-size: 25px;
+    padding-bottom: 10px;
+}
+
+.error{
+    color: red;
+    font-style: italic;
+    padding-bottom: 8px;
+}
+
+form {
+    max-width: 400px; /* Ancho máximo del formulario */
+    margin: 0 auto; /* Centrar el formulario en la página */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888;
+  }
+  
+  /* Estilos para los campos del formulario */
+  form input[type="text"],
+  form input[type="password"],
+  form select {
+    width: 100%; /* Ancho completo para los campos de texto y contraseña */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 10px; /* Margen inferior */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 3px; /* Borde redondeado */
+  }
+  
+  /* Estilos para los botones del formulario */
+  form button {
+    padding: 10px 20px; /* Espaciado interno */
+    background-color: #007bff; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 3px; /* Borde redondeado */
+    cursor: pointer; /* Cambio de cursor al pasar el ratón */
+  }
+  
+  form button:hover {
+    background-color: #0056b3; /* Cambio de color al pasar el ratón */
+  }
+  
