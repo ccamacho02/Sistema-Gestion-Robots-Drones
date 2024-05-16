@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.conf import settings
+from .models import Devices
 
 # Create your views here.
 
@@ -38,3 +39,14 @@ def agendar_reserva(request):
    #    return redirect('agendar_reserva')
    notify_low_stock()
    return render(request, 'agendar_reserva.html')
+
+def inventario(request):
+   devices = Devices.objects.all()
+   if devices:
+      return render(request,'inventario.html',{
+         'devices': devices,
+      })
+   else:
+      return render(request,'inventario.html',{
+         'error': 'No hay dispositivos en el momento',
+      })
