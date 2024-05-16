@@ -1,0 +1,66 @@
+/* styles.css */
+
+body {
+    background-color: #cbe8ec;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    width: 35%; /* Ancho del cuadro del formulario */
+    background: rgb(27,92,136);
+    background: linear-gradient(350deg, rgba(27,92,136,1) 0%, rgba(62,169,209,1) 50%, rgba(27,92,136,1) 100%);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 100px rgba(27,92,136,1); /* Sombra para resaltar el cuadro */
+    flex-direction: column; /* Apilar los elementos verticalmente */
+}
+
+h2 {
+    color: whitesmoke;
+    text-align: center; /* Centrar el título */
+    margin-top: -50px; /* Mover el título hacia arriba */
+    position: relative; /* Habilitar posicionamiento relativo */
+    margin-bottom: 20px;
+}
+
+form {
+    margin-top: 20px; /* Espacio entre el título y el formulario */
+}
+
+input[type="text"], input[type="email"], input[type="number"], input[type="password"], input[type="select"], select{
+    border-radius: 5px; /* Añadir radio de borde */
+    width: 50%; /* Ancho completo */
+    margin-bottom: 10px; /* Espacio entre campos */
+    height: 20px;
+    padding-left: 10px;
+
+}
+
+p {
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+    margin: 8px;
+}
+
+input[type="submit"] {
+    background-color: #96d5de;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block; /* Alinear el botón al centro */
+    margin: 20px auto; /* Centrar el botón horizontalmente */
+}
+
+input[type="submit"]:hover {
+    background-color: #0c9a9a;
+}
