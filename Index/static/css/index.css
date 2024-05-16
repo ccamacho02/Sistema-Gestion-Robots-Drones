@@ -94,3 +94,54 @@ body{
 .sidebar .menu .item a.active {
     font-size: 22px; /* Cambiar el color del texto del enlace activo */
 }
+
+/* Css Tabla */
+/* Archivo: styles.css */
+.styled-table {
+    padding: 8%;
+    width: 95%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 18px;
+    text-align: left;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background: rgb(27,92,136);
+    background: linear-gradient(350deg, rgba(27,92,136,1) 0%, rgba(62,169,209,1) 50%, rgba(27,92,136,1) 100%);
+    backdrop-filter: blur(10px);
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #939393;
+}
+
+.styled-table tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.inventory{
+    width: 95%;
+}
+
+.inventory .title{
+    text-align: center;
+    font-size: 35px;
+}

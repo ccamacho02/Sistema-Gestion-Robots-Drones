@@ -24,18 +24,18 @@
         {% if user.is_authenticated %}
         <ul class="menu">
           <li class="item">
-            <a href="#"><i class="fa-regular fa-calendar"></i> Reservas</a>
+            <a href="{% url 'reservar' %}"><i class="fa-regular fa-calendar"></i> Reservas</a>
           </li>
           <li class="item">
-            <a href="#"><i class="fa-solid fa-cube"></i> Inventario</a>
+            <a href="{% url 'inventario'%}"><i class="fa-solid fa-cube"></i> Inventario</a>
           </li>
         </ul>
         {% endif %}
         <div class="auth-menu">
           <ul class="menu">
             {% if user.is_authenticated %}
-            <li class="itemU">
-              <p><i class="fa-solid fa-user"></i> {{user}}</p>
+            <li class="item">
+              <a href="{% url 'admin:index' %}"><i class="fa-solid fa-user"></i> {{user}}</a>
             </li>  
             <li class="item">
                 <a href="{% url 'signout' %}"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
