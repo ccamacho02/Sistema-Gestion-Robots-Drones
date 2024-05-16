@@ -4,9 +4,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from .forms import CustomAuthenticationForm, OTPForm
-from .utils import send_otp
+from .utils import send_otp, updateQRResult
 from datetime import datetime
+from pyzbar import pyzbar
 import pyotp
+import cv2
 
 
 def index(request):
@@ -93,3 +95,41 @@ def otp(request):
         else:
             error_message = 'OTP not sent'
     return render(request, 'otp.html', {'error': error_message, 'form': form})
+
+def scan_qr(request):
+    post = False
+    return render(request, 'scan_qr.html', {'post': post})
+
+def capture_qr(request):
+    if request.method == 'POST':
+        pass
+    else:
+        cap = cv2.VideoCapture(0)
+
+        if not cap.isOpened():
+            print("Error: Could not open camera.")
+            return
+        while cap.isOpened():
+            ret, frame = cap.read()
+            if ret:
+                barcodes = pyzbar.decode(frame)
+                for barcode in barcodes:
+                    (x, y , w, h) = barcode.rect
+                    cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
+                    barcodeData = barcode.data.decode("utf-8")
+                    barcodeType = barcode.type
+                    text = "{} ({})".format(barcodeData, barcodeType)
+                    cv2.putText(frame, text, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+                    print("Barcode: {} - Type: {}".format(barcodeData, barcodeType))
+
+                    #qr_result = updateQRResult(barcodeData)
+                
+                cv2.imshow("Barcode Scanner", frame)
+                if cv2.waitKey(25) & 0xFF == ord('q'):
+                    cap.release()
+                    cv2.destroyAllWindows()
+                    post = True
+                    break
+            else:
+                break
+        return render(request, 'scan_qr.html', {'qr_result': barcodeData, 'post': post})
