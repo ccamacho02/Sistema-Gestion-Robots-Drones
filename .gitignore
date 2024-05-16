@@ -4,6 +4,7 @@
 # Archivos de configuración local
 *.env
 *.sqlite3
+local_settings.py
 
 # Archivos de caché y compilados
 sistema/__pycache__/
