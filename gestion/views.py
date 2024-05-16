@@ -33,7 +33,8 @@ def notify_low_stock():
    email_admin.send()
 
 def agendar_reserva(request):
-   if request.method == 'POST':
-      notify_low_stock()
-      return redirect('agendar_reserva')
+   # if request.method == 'POST':
+   #    notify_low_stock()
+   #    return redirect('agendar_reserva')
+   notify_low_stock()
    return render(request, 'agendar_reserva.html')
