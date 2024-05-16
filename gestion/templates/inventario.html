@@ -27,5 +27,9 @@
             </table>
         </div>
     </div>
+    {% else %}
+    <div class="content">
+        <p class="title"> {{error}} </p>
+    </div>
     {% endif %}
 {% endblock %}
