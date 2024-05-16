@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reservar</title>
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../static/css/reservar.css">
 <script>
@@ -20,28 +18,25 @@
         });
     });
 </script>
-</head>
-<body>
+<div class="content">
+    <div class="container2">
+        <h2>Formulario de Reserva</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ reserva_form.as_p }}
 
-<div class="container">
-    <h2>Formulario de Reserva</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ reserva_form.as_p }}
+            <div id="grabacionFields" style="display: none;">
+                <h3>Detalles de Grabación</h3>
+                {{ grabacion_form.as_p }}
+            </div>
 
-        <div id="grabacionFields" style="display: none;">
-            <h3>Detalles de Grabación</h3>
-            {{ grabacion_form.as_p }}
-        </div>
+            <div id="entregaFields" style="display: none;">
+                <h3>Detalles de Entrega</h3>
+                {{ entrega_form.as_p }}
+            </div>
 
-        <div id="entregaFields" style="display: none;">
-            <h3>Detalles de Entrega</h3>
-            {{ entrega_form.as_p }}
-        </div>
-
-        <input type="submit" value="Reservar">
-    </form>
+            <input type="submit" value="Reservar">
+        </form>
+    </div>
 </div>
-
-</body>
-</html>
+{% endblock %}

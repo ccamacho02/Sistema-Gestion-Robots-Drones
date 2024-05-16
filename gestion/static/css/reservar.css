@@ -1,17 +1,6 @@
 /* styles.css */
 
-body {
-    background-color: #cbe8ec;
-    color: white;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-.container {
+.container2 {
     width: 35%; /* Ancho del cuadro del formulario */
     background: rgb(27,92,136);
     background: linear-gradient(350deg, rgba(27,92,136,1) 0%, rgba(62,169,209,1) 50%, rgba(27,92,136,1) 100%);
@@ -28,6 +17,16 @@ h2 {
     margin-top: -50px; /* Mover el título hacia arriba */
     position: relative; /* Habilitar posicionamiento relativo */
     margin-bottom: 20px;
+    font-size: x-large;
+
+
+}
+
+h3 {
+    color: whitesmoke;
+    margin-bottom: 15px;
+    text-align: center;
+
 }
 
 form {
@@ -40,7 +39,7 @@ input[type="text"], input[type="email"], input[type="number"], input[type="passw
     margin-bottom: 10px; /* Espacio entre campos */
     height: 20px;
     padding-left: 10px;
-
+    font-size: small;
 }
 
 p {
@@ -48,6 +47,7 @@ p {
     display: flex;
     width: 100%;
     margin: 8px;
+    color: white
 }
 
 input[type="submit"] {
