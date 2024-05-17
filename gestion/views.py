@@ -136,12 +136,10 @@ def capture_qr(request):
         print(user)
         if user.exists():
             name = user[0].nombre
-            messages.success(request, f'El usuario con codigo {
-                             codigo} es {name}')
+            messages.success(request, f'El usuario con codigo {codigo} es {name}')
             return redirect('reservar')
         else:
-            messages.error(request, f'El usuario con codigo {
-                           codigo} no existe')
+            messages.error(request, f'El usuario con codigo {codigo} no existe')
             return redirect('scan-qr')
     else:
         cap = cv2.VideoCapture(0)
