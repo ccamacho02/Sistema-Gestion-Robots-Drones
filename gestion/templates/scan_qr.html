@@ -1,0 +1,34 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+    <div class="content">
+      <div>
+         {% if messages %}
+            <ul class="messages">
+               {% for message in messages %}
+                  <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+               {% endfor %}
+            </ul>
+         {% endif %}
+         <form action="{% url 'capture-qr' %}" method="GET">
+            <h1>Escanear código de barras</h1>
+            {% csrf_token %}
+            <p style="text-align: center; margin-top: 15px;">
+               <button type="submit">Escanear</button>
+            </p>
+         </form>
+         <br>
+         {% if qr_result %}
+         <form method="POST">
+               <h2>Código de estudiante:</h2>
+               {% csrf_token %}
+               <textarea style="margin-top: 10px;" rows="1" cols="11" name="codigo" readonly>{{qr_result}}</textarea>
+               <p style="text-align: center; margin-top: 15px;">
+                  <button type="submit">Validar</button>
+               </p>
+            </form>
+         {% endif %}
+      </div>
+   </div>
+{% endblock %}

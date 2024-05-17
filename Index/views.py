@@ -93,3 +93,4 @@ def otp(request):
         else:
             error_message = 'OTP not sent'
     return render(request, 'otp.html', {'error': error_message, 'form': form})
+

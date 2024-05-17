@@ -1,6 +1,9 @@
 # Entornos virtuales
 /venv/
 
+# Contenido media
+/media/
+
 # Archivos de configuración local
 *.env
 *.sqlite3

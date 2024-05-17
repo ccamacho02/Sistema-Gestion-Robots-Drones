@@ -1,0 +1,35 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+    {% if devices %}
+    <div class="content">
+        <div class="inventory">
+            <p class="title"> Inventario </p>
+            <table border="1" class = "styled-table">
+                <thead>
+                    <th>Dispositivo</th>
+                    <th>Cantidad</th>
+                    <th>Estado</th>
+                    <th>Tipo</th>
+                    <th>Marca</th>
+                </thead>
+                {% for device in devices %}
+                <tbody>
+                    <tr>
+                    <td><p>{{device.dispositivo}}</p></td>
+                    <td><p>{{device.cantidad}}</p></td>
+                    <td><p>{{device.estado}}</p></td>
+                    <td><p>{{device.tipo}}</p></td>
+                    <td><p>{{device.marca}}</p></td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    {% else %}
+    <div class="content">
+        <p class="title"> {{error}} </p>
+    </div>
+    {% endif %}
+{% endblock %}

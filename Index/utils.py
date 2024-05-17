@@ -9,3 +9,7 @@ def send_otp(request):
    request.session['otp_valid_until'] = str(valid_date)
 
    print(f"Your OTP is: {otp}")
+
+def updateQRResult(result):
+   qr_result = result
+   return qr_result

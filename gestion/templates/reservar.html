@@ -1,0 +1,49 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../static/css/reservar.css">
+<script>
+    $(document).ready(function() {
+        $('#id_tipo_servicio').change(function() {
+            var tipoServicio = $(this).val();
+            if (tipoServicio == 'Grabacion') {
+                $('#grabacionFields').show();
+                $('#entregaFields').hide();
+            } else if (tipoServicio == 'Entrega') {
+                $('#grabacionFields').hide();
+                $('#entregaFields').show();
+            }
+        });
+    });
+</script>
+<div class="content">
+    <div class="container2">
+        <h2>Formulario de Reserva</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ reserva_form.as_p }}
+            
+            <div id="grabacionFields" style="display: none;">
+                <h3>Detalles de Grabación</h3>
+                {{ grabacion_form.as_p }}
+            </div>
+            
+            <div id="entregaFields" style="display: none;">
+                <h3>Detalles de Entrega</h3>
+                {{ entrega_form.as_p }}
+            </div>
+            
+            <input type="submit" value="Reservar">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="color: white; list-style: none;">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </form>
+    </div>
+</div>
+{% endblock %}
