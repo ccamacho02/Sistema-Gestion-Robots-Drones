@@ -11,11 +11,11 @@ from pyzbar import pyzbar
 import cv2
 import qrcode
 import os
-
+from django.contrib.auth.decorators import login_required
 import random
 import string
 
-
+@login_required
 def reservar(request):
     if request.method == 'POST':
         reserva_form = ReservaForm(request.POST)
@@ -32,7 +32,8 @@ def reservar(request):
                 reserva_instance.lugar_grabacion = grabacion_form.cleaned_data['lugar_grabacion']
                 reserva_instance.duracion_evento = grabacion_form.cleaned_data['duracion_evento']
                 reserva_instance.save()
-                enviar_qr(qr_code)
+                message = 'A continuación, adjuntamos el código QR para que pueda descargar el video del evento (Video disponible al finalizar el evento):'
+                enviar_qr(qr_code, message)
                 return redirect('index')  # Redirigir a una página de éxito
             elif tipo_servicio == 'Entrega' and entrega_form.is_valid():
                 reserva_instance.lugar_origen = entrega_form.cleaned_data['lugar_origen']
@@ -42,7 +43,8 @@ def reservar(request):
                 reserva_instance.correo_destinatario = entrega_form.cleaned_data[
                     'correo_destinatario']
                 reserva_instance.save()
-                enviar_qr(qr_code)
+                message = 'A continuación, adjuntamos el código QR para que pueda confirmar la entrega de su producto:'
+                enviar_qr(qr_code, message)
                 return redirect('index')  # Redirigir a una página de éxito
     else:
         reserva_form = ReservaForm()
@@ -55,10 +57,8 @@ def reservar(request):
         'entrega_form': entrega_form,
     })
 
-
-def enviar_qr(qr_code):
+def enviar_qr(qr_code, message):
     subject = 'Codigo QR confirmacion de reserva'
-    message = 'A continuación, adjuntamos el código QR para que pueda confirmar la entrega de su producto:'
     template = render_to_string('email.html', {
         'message': message,
     })
@@ -86,8 +86,6 @@ def enviar_qr(qr_code):
     email_user.send()
     email_admin.send()
 
-
-
 def generate_qr_code(data, filename='qr_code.png'):
     qr = qrcode.QRCode(
         version=1,
@@ -102,7 +100,6 @@ def generate_qr_code(data, filename='qr_code.png'):
     img.save(img_path)
     return img_path
 
-
 def generate_random_code(length=10):
     # Define el conjunto de caracteres: letras mayúsculas y números
     characters = string.ascii_uppercase + string.digits
@@ -110,8 +107,7 @@ def generate_random_code(length=10):
     random_code = ''.join(random.choice(characters) for _ in range(length))
     return random_code
 
-
-
+@login_required
 def inventario(request):
     devices = Devices.objects.all()
     if devices:
@@ -123,11 +119,11 @@ def inventario(request):
             'error': 'No hay dispositivos en el momento',
         })
 
-
+@login_required
 def scan_qr(request):
     return render(request, 'scan_qr.html')
 
-
+@login_required
 def capture_qr(request):
     barcodeData = None
     if request.method == 'POST':

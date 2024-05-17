@@ -10,7 +10,11 @@ from .forms import CustomAuthenticationForm, OTPForm
 from .utils import send_otp
 from datetime import datetime
 import pyotp
+from django.contrib.auth.decorators import login_required
 
+
+def obligatory(request):
+    return redirect('signin')
 
 def index(request):
         return render(request,'index.html')
@@ -40,7 +44,7 @@ def signup(request):
                 'error': 'Password do not match'
             })
 
-
+@login_required
 def signout(request):
     logout(request)
     return redirect('index')
@@ -53,9 +57,12 @@ def signin(request):
         })
     else:
         username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(
-            request, username=username, password=password)
+        try:
+            username = User.objects.get(email=username).username
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
+        except User.DoesNotExist:
+            user = None
 
         if user is None:
             return render(request, 'signin.html', {
@@ -68,7 +75,6 @@ def signin(request):
             enviar_otp(otp)
             return redirect('otp')
         
-
 def enviar_otp(otp):
     subject = 'Codigo de verificación de dos pasos'
     message = 'Su código de verificación de dos pasos para que pueda iniciar sesión en su cuenta es:'

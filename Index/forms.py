@@ -4,7 +4,7 @@ from django import forms
 class CustomAuthenticationForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['username'].label = 'Nombre de usuario'
+        self.fields['username'].label = 'Usuario (Correo Eletrónico)'
         self.fields['password'].label = 'Contraseña'
 
 class OTPForm(forms.Form):
