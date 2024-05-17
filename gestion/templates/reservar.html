@@ -24,18 +24,25 @@
         <form method="post">
             {% csrf_token %}
             {{ reserva_form.as_p }}
-
+            
             <div id="grabacionFields" style="display: none;">
                 <h3>Detalles de Grabación</h3>
                 {{ grabacion_form.as_p }}
             </div>
-
+            
             <div id="entregaFields" style="display: none;">
                 <h3>Detalles de Entrega</h3>
                 {{ entrega_form.as_p }}
             </div>
-
+            
             <input type="submit" value="Reservar">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="color: white; list-style: none;">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </form>
     </div>
 </div>
