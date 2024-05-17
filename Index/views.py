@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.template.loader import render_to_string
+from django.conf import settings
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.core.mail import EmailMessage
 from django.contrib.auth import login, logout, authenticate
 from .forms import CustomAuthenticationForm, OTPForm
 from .utils import send_otp
@@ -61,8 +64,28 @@ def signin(request):
             })
         else:
             request.session['username'] = username
-            send_otp(request)
+            otp = send_otp(request)
+            enviar_otp(otp)
             return redirect('otp')
+        
+
+def enviar_otp(otp):
+    subject = 'Codigo de verificación de dos pasos'
+    message = 'Su código de verificación de dos pasos para que pueda iniciar sesión en su cuenta es:'
+    template = render_to_string('email_otp.html', {
+        'message': message,
+        'otp': otp,
+    })
+
+    email_admin = EmailMessage(
+        subject,
+        template,
+        settings.EMAIL_HOST_USER,
+        ['sistema.gestion.drones@gmail.com']
+    )
+
+    email_admin.fail_silently = False
+    email_admin.send()
         
 def otp(request):
     form = OTPForm()
